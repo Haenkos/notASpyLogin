@@ -3,23 +3,22 @@ package net.haenkos;
 import java.util.Scanner;
 import org.apache.commons.lang3.StringUtils;
 
-public class Prompter {
-    private Validator validator;
-    private Scanner prompt;
+public class Prompter implements IPrompter {
+    private final IValidator validator;
+    private final IDialog dialog;
 
-    Prompter() {
-        validator = new Validator();
-        prompt = new Scanner(System.in);
+    public Prompter(IValidator validator, IDialog dialog) {
+        this.validator = validator;
+        this.dialog = dialog;
     }
 
+    @Override
     public String promptServiceNumber() throws EndProgramException {
         boolean valid;
         String serNumInput;
 
-        System.out.print("Please enter your service number: ");
-
         do {
-            serNumInput = prompt.nextLine();
+            serNumInput = dialog.serviceNumberDialog();
 
             if (serNumInput.equals("exit")) {
                 throw new EndProgramException("Goodbye!");
@@ -28,7 +27,7 @@ public class Prompter {
             valid = validator.validateServiceNumber(serNumInput);
 
             if (!valid) {
-                System.out.print("Invalid service Number, who is this? ");
+                dialog.whoIsThisDialog();
             }
 
         } while (!valid);
@@ -36,11 +35,9 @@ public class Prompter {
         return formatSerNum(serNumInput);
     }
 
-    public boolean promptPassfrase() {
-        System.out.print("Please enter passfrase: ");
-        String passfraseInput = prompt.nextLine();
-
-        return validator.comparePassfrase(passfraseInput);
+    @Override
+    public boolean promptPassphrase() {
+        return validator.comparePassphrase(dialog.passphraseDialog());
     }
 
 

@@ -1,14 +1,15 @@
 package net.haenkos;
 
-public class Controller {
+public class Controller implements IController {
     Logger logger;
     Prompter prompter;
 
     Controller() {
         logger = new Logger();
-        prompter = new Prompter();
+        //prompter = new Prompter();
     }
 
+    @Override
     public void newLogin() throws EndProgramException {
         String serNum = prompter.promptServiceNumber();
         if(logger.isLoggedIn(serNum)) {
@@ -16,7 +17,7 @@ public class Controller {
         } else if (logger.isBlackListed(serNum)) {
             System.out.println("You've tried this once. We are not falling for it: you are on the blacklist!\n");
         } else {
-            if (prompter.promptPassfrase())
+            if (prompter.promptPassphrase())
             {
                 logger.logIn(serNum);
                 System.out.printf("Welcome agent %s!\n\n", serNum);
