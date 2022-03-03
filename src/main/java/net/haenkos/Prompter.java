@@ -20,7 +20,7 @@ public class Prompter implements IPrompter {
         do {
             serNumInput = dialog.serviceNumberDialog();
 
-            if (serNumInput.equals("exit")) {
+            if (serNumInput == null) {
                 throw new EndProgramException("Goodbye!");
             }
 
@@ -36,8 +36,14 @@ public class Prompter implements IPrompter {
     }
 
     @Override
-    public boolean promptPassphrase() {
-        return validator.comparePassphrase(dialog.passphraseDialog());
+    public boolean promptPassphrase() throws EndProgramException {
+        String passphrase = dialog.passphraseDialog();
+
+        if (passphrase == null) {
+            throw new EndProgramException("OK, bye");
+        }
+
+        return validator.comparePassphrase(passphrase);
     }
 
 

@@ -1,9 +1,9 @@
 package net.haenkos;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
+
+import static org.junit.Assert.*;
+
 /**
  * Unit test for Dialog Class.
  */
@@ -15,7 +15,14 @@ public class DialogTest {
     public void serNumDialogTester ()
     {
         Dialog dialog = new Dialog();
-        assertEquals("placeholderMessage", dialog.serviceNumberDialog());
+        assertNotNull(dialog.serviceNumberDialog());
+    }
+
+    @Test
+    public void blacklistDialogTester() {
+        Dialog dialog = new Dialog();
+
+        dialog.blackListedMessage();
     }
 
 }

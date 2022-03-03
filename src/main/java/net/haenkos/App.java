@@ -8,12 +8,16 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println("\n*** Welcome to the definitely NOT a spy intranet ***\n");
-        System.out.println("To exit program, type 'exit'\n");
+        IDialog dialog = new Dialog();
+        IValidator validator = new Validator();
+        IPrompter prompter = new Prompter(validator, dialog);
+        ILogger logger = new Logger();
+        IController controller = new Controller(prompter, logger, dialog);
 
-        Controller controller = new Controller();
+        dialog.welcomeSplash();
 
         try {
+            //noinspection InfiniteLoopStatement
             while (true) {
                 controller.newLogin();
             }

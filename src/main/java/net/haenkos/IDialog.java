@@ -14,4 +14,6 @@ public interface IDialog {
     void welcomeAgentMessage(String serNum);
 
     void whoIsThisDialog();
+
+    void welcomeSplash();
 }
