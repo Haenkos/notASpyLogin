@@ -1,7 +1,11 @@
 package net.haenkos;
 
 public class Validator implements IValidator {
+    IDbAccess dbAccess;
 
+    public Validator (IDbAccess dbAccess) {
+        this.dbAccess = dbAccess;
+    }
     @Override
     public boolean validateServiceNumber(String serNum) {
         try {

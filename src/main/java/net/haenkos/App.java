@@ -8,8 +8,9 @@ public class App
 {
     public static void main( String[] args )
     {
+        IDbAccess dbAccess = new DbAccess();
+        IValidator validator = new Validator(dbAccess);
         IDialog dialog = new Dialog();
-        IValidator validator = new Validator();
         IPrompter prompter = new Prompter(validator, dialog);
         ILogger logger = new Logger();
         IController controller = new Controller(prompter, logger, dialog);

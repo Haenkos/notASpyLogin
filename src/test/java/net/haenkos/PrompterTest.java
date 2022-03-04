@@ -7,9 +7,10 @@ import java.util.regex.*;
 public class PrompterTest {
     @Test
     public void promptSerNumTest() throws EndProgramException {
-        Dialog dialog = new Dialog();
-        Validator validator = new Validator();
-        Prompter prompter = new Prompter(validator, dialog);
+        IDbAccess dbAccess = new Test_DbAccess();
+        IValidator validator = new Validator(dbAccess);
+        IDialog dialog = new Dialog();
+        IPrompter prompter = new Prompter(validator, dialog);
 
         Pattern pattern = Pattern.compile("\\d\\d\\d");
         Matcher matcher = pattern.matcher(prompter.promptServiceNumber());
