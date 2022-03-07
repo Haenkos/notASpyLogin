@@ -1,7 +1,10 @@
 package net.haenkos;
 
+import java.util.Map;
+import java.util.HashMap;
+
 public interface IDbAccess {
-    String[] getAgent(String serNum) throws AgentNotFoundException;
+    HashMap<String, String> getAgent(String serNum) throws Exception;
 
     void updateBlacklist(String serNum);
 }

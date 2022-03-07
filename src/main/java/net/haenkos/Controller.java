@@ -19,7 +19,7 @@ public class Controller implements IController {
         } else if (logger.isBlackListed(serNum)) {
             dialog.alreadyBlacklistedMessage();
         } else {
-            if (prompter.promptPassphrase())
+            if (prompter.promptPassphrase(serNum))
             {
                 logger.logIn(serNum);
                 dialog.welcomeAgentMessage(serNum);

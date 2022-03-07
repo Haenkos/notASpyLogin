@@ -36,14 +36,14 @@ public class Prompter implements IPrompter {
     }
 
     @Override
-    public boolean promptPassphrase() throws EndProgramException {
+    public boolean promptPassphrase(String serNum) throws EndProgramException {
         String passphrase = dialog.passphraseDialog();
 
         if (passphrase == null) {
             throw new EndProgramException("OK, bye");
         }
 
-        return validator.comparePassphrase(passphrase);
+        return validator.comparePassphrase(passphrase, serNum);
     }
 
 
